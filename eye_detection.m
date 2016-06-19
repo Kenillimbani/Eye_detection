@@ -1,5 +1,12 @@
 %Read the input image 
-I = imread('extract1.jpg');
+imgLocation = input('Enter your file path here:','s');
+if(strcmp(imgLocation(end),'\')==false)
+    imgLocation = strcat(imgLocation,'\');
+end
+filename = input('Enter file name(with extension) :','s');
+format = filename(end-2:end);
+inString = strcat(imgLocation,filename);
+I = imread(inString,format);
 %To detect Mouth
 MouthDetect = vision.CascadeObjectDetector('Mouth','MergeThreshold',16);
 BB=step(MouthDetect,I);
